@@ -2,11 +2,11 @@ import React from 'react';
 import { Switch } from 'react-router-dom';
 import Route from './Route';
 
-import SignIn from '../pages/SignIn';
-import Deliveries from '../pages/Deliveries';
-import Deliverymen from '../pages/Deliverymen';
-import Problems from '../pages/Problems';
-import Recipients from '../pages/Recipients';
+import SignIn from '~/pages/SignIn';
+import Deliveries from '~/pages/Deliveries';
+import Deliverymen from '~/pages/Deliverymen';
+import Problems from '~/pages/Problems';
+import Recipients from '~/pages/Recipients';
 
 export default function Routes() {
   return (
