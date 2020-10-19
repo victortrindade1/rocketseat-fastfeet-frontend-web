@@ -10,7 +10,7 @@ export default function RouteWrapper({
   isPrivate,
   ...rest
 }) {
-  const signed = false; // temporario. esta const será automatizada
+  const signed = true; // temporario. esta const será automatizada
 
   if (!signed && isPrivate) {
     return <Redirect to="/" />;
@@ -25,7 +25,7 @@ export default function RouteWrapper({
   return (
     <Route
       {...rest}
-      render={(props) => (
+      render={props => (
         <Layout>
           <Component {...props} />
         </Layout>

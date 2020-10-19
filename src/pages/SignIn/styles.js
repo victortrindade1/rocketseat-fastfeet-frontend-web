@@ -33,6 +33,7 @@ export const Form = styled.div`
     border: 1px solid #dddddd;
     opacity: 1;
     font-size: 16px;
+    color: #999999;
   }
 
   button {
