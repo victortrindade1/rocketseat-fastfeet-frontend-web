@@ -1,23 +1,33 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-import { Container, Logout } from './styles';
+import { Container, Profile, Navigation, Logo } from './styles';
+
+import logo from '~/assets/fastfeet-logo.png';
 
 function Header() {
   return (
     <Container>
-      {/* <Link>
-        <img src="" alt="" />
-      </Link>
-      <Link>Encomendas</Link>
-      <Link>Entregadores</Link>
-      <Link>Destinatários</Link>
-      <Link>Problemas</Link> */}
+      <nav>
+        <Navigation>
+          <NavLink to="/deliveries">
+            <Logo>
+              <img src={logo} alt="FastFeet" />
+            </Logo>
+          </NavLink>
 
-      <Logout>
-        <strong>Alfredo Frefredo</strong>
-        <button type="submit">sair do sistema</button>
-      </Logout>
+          <NavLink to="/deliveries">ENCOMENDAS</NavLink>
+          <NavLink to="/deliverymen">ENTREGADORES</NavLink>
+          <NavLink to="/recipients">DESTINATÁRIOS</NavLink>
+          <NavLink to="/problems">PROBLEMAS</NavLink>
+        </Navigation>
+      </nav>
+      <aside>
+        <Profile>
+          <strong>Alfredo Frefredo</strong>
+          <button type="submit">sair do sistema</button>
+        </Profile>
+      </aside>
     </Container>
   );
 }
