@@ -10,4 +10,4 @@ Ref: https://github.com/GustavoBlaze/fastfeet
 
 # O q estou fazendo agora:
 
-Implementando unform no form do SignIn
+Configurando o Store com Redux
