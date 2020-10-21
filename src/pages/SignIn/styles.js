@@ -5,7 +5,7 @@ export const Logo = styled.div`
   height: 50px;
 `;
 
-export const Form = styled.div`
+export const Login = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 4px;
@@ -20,6 +20,13 @@ export const Form = styled.div`
   form {
     display: flex;
     flex-direction: column;
+
+    span {
+      color: #fb6f91;
+      align-self: flex-start;
+      margin: 0 0 10px;
+      font-weight: bold;
+    }
   }
 
   strong {
@@ -33,7 +40,11 @@ export const Form = styled.div`
     border: 1px solid #dddddd;
     opacity: 1;
     font-size: 16px;
-    color: #999999;
+    color: #555555;
+
+    ::placeholder {
+      color: #999999;
+    }
   }
 
   button {
