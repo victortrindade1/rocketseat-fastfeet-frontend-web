@@ -10,4 +10,4 @@ Ref: https://github.com/GustavoBlaze/fastfeet
 
 # O q estou fazendo agora:
 
-Armazenando dados de user no state user
+Persistindo autenticação
