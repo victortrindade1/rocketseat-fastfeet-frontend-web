@@ -11,6 +11,20 @@ const rotate = keyframes`
   }
 `;
 
+const appear = keyframes`
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50%{
+    transform: scale(1.05);
+  }
+  100%{
+    opacity: 1;
+    transform: scale(1);
+  }
+`;
+
 export const Logo = styled.div`
   height: 50px;
 `;
@@ -22,6 +36,7 @@ export const Login = styled.div`
   background-color: #fff;
   max-width: 360px;
   padding: 60px 30px 60px 30px;
+  animation: ${appear} 350ms linear backwards;
 
   img {
     padding-bottom: 30px;
@@ -68,6 +83,8 @@ export const Login = styled.div`
     color: #fff;
     font-weight: bold;
     transition: background 0.2s;
+    animation: ${appear} 350ms linear backwards;
+    animation-delay: 350ms;
 
     &:hover {
       background: ${darken(0.2, colors.primary)};
