@@ -1,5 +1,15 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+import { darken } from 'polished';
+
 import colors from '~/styles/colors';
+
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  } to {
+    transform: rotate(360deg);
+  }
+`;
 
 export const Logo = styled.div`
   height: 50px;
@@ -49,15 +59,24 @@ export const Login = styled.div`
 
   button {
     margin-top: 15px;
-    background-color: ${colors.primary};
+    background: ${colors.primary};
     border-radius: 4px;
     height: 45px;
     border: none;
+    font-size: 16px;
+    padding: 12px;
+    color: #fff;
+    font-weight: bold;
+    transition: background 0.2s;
 
-    strong {
-      color: #fff;
-      padding: 12px 20px 12px 20px;
-      font-size: 16px;
+    &:hover {
+      background: ${darken(0.2, colors.primary)};
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+      animation: ${rotate} 2s linear infinite;
     }
   }
 `;

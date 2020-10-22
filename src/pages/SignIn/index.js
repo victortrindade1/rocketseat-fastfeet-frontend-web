@@ -1,7 +1,8 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Form, Input } from 'unform';
 import * as Yup from 'yup';
+import { AiOutlineLoading } from 'react-icons/ai';
 
 import { signInRequest } from '~/store/modules/auth/actions';
 
@@ -20,6 +21,7 @@ const schema = Yup.object().shape({
 
 function SignIn() {
   const dispatch = useDispatch();
+  const loading = useSelector(state => state.auth.loading);
 
   function handleSubmit({ email, password }) {
     dispatch(signInRequest(email, password));
@@ -37,7 +39,7 @@ function SignIn() {
           <Input name="password" type="password" placeholder="**********" />
 
           <button type="submit">
-            <strong>Entrar no sistema</strong>
+            {loading ? <AiOutlineLoading /> : 'Entrar no sistema'}
           </button>
         </Form>
       </Login>

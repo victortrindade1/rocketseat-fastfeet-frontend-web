@@ -4,8 +4,7 @@ import { persistReducer } from 'redux-persist';
 export default reducers => {
   const persistedReducer = persistReducer(
     {
-      key:
-        'estaeumafraseinutilqvcestaseesforcandoumpoucopralerpqtasemrespeitarquasenadadalinguaportuguesabeijos',
+      key: 'fastfeet',
       storage,
       whitelist: ['auth', 'user'],
     },

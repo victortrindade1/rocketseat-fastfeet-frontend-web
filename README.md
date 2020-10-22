@@ -10,4 +10,4 @@ Ref: https://github.com/GustavoBlaze/fastfeet
 
 # O q estou fazendo agora:
 
-Persistindo autenticação
+Loading da autenticação
