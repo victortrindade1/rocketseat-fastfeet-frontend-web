@@ -1,11 +1,21 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+
+import { signOut } from '~/store/modules/auth/actions';
 
 import { Container, Profile, Navigation, Logo } from './styles';
 
 import logo from '~/assets/fastfeet-logo.png';
 
 function Header() {
+  const dispatch = useDispatch();
+  const profile = useSelector(state => state.user.profile);
+
+  function handleSignOut() {
+    dispatch(signOut());
+  }
+
   return (
     <Container>
       <nav>
@@ -24,8 +34,10 @@ function Header() {
       </nav>
       <aside>
         <Profile>
-          <strong>Alfredo Frefredo</strong>
-          <button type="submit">sair do sistema</button>
+          <strong>{profile.name}</strong>
+          <button type="button" onClick={handleSignOut}>
+            sair do sistema
+          </button>
         </Profile>
       </aside>
     </Container>

@@ -63,6 +63,12 @@ export const Profile = styled.div`
   strong {
     color: #666666;
     padding: 6px 0 6px 0;
+    /* Limit for characters */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 95px;
+    /* Limit for characters */
   }
 
   button {

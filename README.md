@@ -10,4 +10,4 @@ Ref: https://github.com/GustavoBlaze/fastfeet
 
 # O q estou fazendo agora:
 
-Requisições autenticadas
+Logout e dados do usuário no Header
