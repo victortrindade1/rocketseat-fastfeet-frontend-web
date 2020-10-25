@@ -9,5 +9,3 @@ export const Container = styled.div`
   margin: 0 auto;
   /* Centraliza div */
 `;
-
-export const TableDeliveries = styled.div``;

@@ -68,7 +68,7 @@ export const Login = styled.div`
     color: #555555;
 
     ::placeholder {
-      color: #999999;
+      color: ${colors.secondary};
     }
   }
 

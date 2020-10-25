@@ -32,7 +32,7 @@ export const Navigation = styled.div`
   }
   a {
     font-size: 15px;
-    color: #999999;
+    color: ${colors.secondary};
     padding: 0px 10px 0px 10px;
     text-decoration: none;
     transition: color 0.8s;

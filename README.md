@@ -10,4 +10,11 @@ Ref: https://github.com/GustavoBlaze/fastfeet
 
 # O q estou fazendo agora:
 
-Logout e dados do usuário no Header
+Tem vários elementos da página q é comum às outras páginas. Portanto, vou criar
+alguns componentes separado:
+Componente título da página OK
+Componente de busca
+Componente botão cadastrar
+Componente Table
+
+Page Deliveries

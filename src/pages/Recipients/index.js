@@ -1,9 +1,18 @@
 import React from 'react';
 
-// import { Container } from './styles';
+import { Container } from './styles';
+
+import HeaderBody from '~/components/HeaderBody';
 
 function Recipients() {
-  return <div />;
+  return (
+    <Container>
+      <HeaderBody
+        title="Gerenciando destinatários"
+        placeholder="Buscar por destinatários"
+      />
+    </Container>
+  );
 }
 
 export default Recipients;
