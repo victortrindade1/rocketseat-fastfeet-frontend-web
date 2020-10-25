@@ -10,11 +10,5 @@ Ref: https://github.com/GustavoBlaze/fastfeet
 
 # O q estou fazendo agora:
 
-Tem vários elementos da página q é comum às outras páginas. Portanto, vou criar
-alguns componentes separado:
-Componente título da página OK
-Componente de busca
-Componente botão cadastrar
-Componente Table
-
-Page Deliveries
+A Table está em HTML puro dentro do component. Vou primeiro transferir os dados
+pra uma const, e depois vou implementar pra todas as pages.
