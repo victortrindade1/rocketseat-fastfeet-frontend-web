@@ -10,5 +10,13 @@ Ref: https://github.com/GustavoBlaze/fastfeet
 
 # O q estou fazendo agora:
 
-A Table está em HTML puro dentro do component. Vou primeiro transferir os dados
-pra uma const, e depois vou implementar pra todas as pages.
+Listei deliveries. O status não tá listado, pq ainda não sei daonde vem. Talvez seja um campo a mais no banco do backend.
+
+Vou fazer um component DeliveryItem, e passar apenas 1 item como argumento. Desta forma, farei apenas 1 loop .map nos deliveries. Antes, eu dava loop pra printar, e um loop pra alterar state de todos antes. Vou formatar 1 só agora ;)
+
+Falta printar status
+Falta formatar o id
+avatar entregador
+formatar status
+formatar botão ações
+menu ações
