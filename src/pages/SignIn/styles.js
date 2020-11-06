@@ -1,7 +1,7 @@
 import styled, { keyframes } from 'styled-components';
 import { darken } from 'polished';
 
-import colors from '~/styles/colors';
+import { colors } from '~/styles/colors';
 
 const rotate = keyframes`
   from {

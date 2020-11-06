@@ -55,8 +55,10 @@ function Deliveries() {
           </tr>
         </thead>
         <tbody>
-          {deliveries.map(delivery => {
-            return <DeliveryItem key={delivery.id} data={delivery} />;
+          {deliveries.map((delivery, index) => {
+            return (
+              <DeliveryItem key={delivery.id} data={delivery} index={index} />
+            );
           })}
         </tbody>
       </Table>

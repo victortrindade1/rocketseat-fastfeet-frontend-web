@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { darken } from 'polished';
 
-import colors from '~/styles/colors';
+import { colors } from '~/styles/colors';
 
 export const Container = styled.div`
   height: 64px;

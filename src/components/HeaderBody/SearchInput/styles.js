@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Form as FormUnform, Input as InputUnform } from 'unform';
 
-import colors from '~/styles/colors';
+import { colors } from '~/styles/colors';
 
 export const Form = styled(FormUnform)`
   background: #fff;
