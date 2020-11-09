@@ -9,7 +9,12 @@ export const Container = styled.table`
 
   thead {
     th {
+      color: #444444;
+      font-size: 16px;
+      font-weight: bold;
       text-align: left;
+      /* padding: 20px; */
+      padding-bottom: 0px;
     }
 
     th:first-child {

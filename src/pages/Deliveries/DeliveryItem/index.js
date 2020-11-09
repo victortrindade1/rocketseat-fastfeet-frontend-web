@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { MdRemoveRedEye, MdEdit, MdDeleteForever } from 'react-icons/md';
 
 import Avatar from '~/components/Avatar';
+import ActionsMenu from '~/components/ActionsMenu';
 
 import { DeliverymanContainer, DeliverymanName } from './styles';
 
@@ -26,7 +28,22 @@ function DeliveryItem({ data, index }) {
       <td>{data.recipient.city}</td>
       <td>{data.recipient.state}</td>
       <td>ENTREGUE</td>
-      <td>...</td>
+      <td>
+        <ActionsMenu>
+          <button type="button">
+            <MdRemoveRedEye size={24} color="#8E5BE8" />
+            Visualizar
+          </button>
+          <button type="button">
+            <MdEdit size={24} color="#4D85EE" />
+            Editar
+          </button>
+          <button type="button">
+            <MdDeleteForever size={24} color="#DE3B3B" />
+            Excluir
+          </button>
+        </ActionsMenu>
+      </td>
     </tr>
   );
 }
