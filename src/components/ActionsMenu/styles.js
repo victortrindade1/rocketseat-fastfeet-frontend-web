@@ -26,7 +26,7 @@ export const ActionList = styled.div`
   width: 150px;
   left: calc(50% - 75px);
   top: calc(100% + 5px);
-  background: #fff;
+  background: rgb(245, 245, 245);
   border-radius: 4px;
   padding: 15px 5px;
   box-shadow: 0px 0px 2px #00000026;
@@ -35,15 +35,15 @@ export const ActionList = styled.div`
   z-index: 2;
 
   &::before {
-    content: '▲';
+    content: '';
     position: absolute;
-    left: calc(50% - 5px);
+    left: calc(50% - 10px);
     top: -10px;
-    width: 10px;
-    height: 10px;
-    font-size: 10px;
-    text-shadow: 0px -1px 3px #00000057;
-    color: #fff;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid rgb(245, 245, 245);
   }
 
   button {

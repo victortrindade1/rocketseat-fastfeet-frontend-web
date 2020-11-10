@@ -15,3 +15,7 @@ export const DeliverymanName = styled.div`
     max-width: 140px;
   }
 `;
+
+export const StatusDelivery = styled.div`
+  background: ${props => props.color};
+`;

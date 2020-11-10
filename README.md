@@ -12,10 +12,5 @@ https://github.com/EliasGcf/fastfeet-web
 
 # O q estou fazendo agora:
 
-component menu de ações. Vai ser um component com {chiildren}, apenas esqueleto, com css pra lista, font size, cor da fonte.
-Vai receber um array de opções como children.
-
 Falta printar status
 formatar status
-formatar botão ações
-menu ações

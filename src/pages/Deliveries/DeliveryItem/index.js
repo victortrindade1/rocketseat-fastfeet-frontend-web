@@ -5,7 +5,11 @@ import { MdRemoveRedEye, MdEdit, MdDeleteForever } from 'react-icons/md';
 import Avatar from '~/components/Avatar';
 import ActionsMenu from '~/components/ActionsMenu';
 
-import { DeliverymanContainer, DeliverymanName } from './styles';
+import {
+  DeliverymanContainer,
+  DeliverymanName,
+  StatusDelivery,
+} from './styles';
 
 function DeliveryItem({ data, index }) {
   return (
@@ -27,7 +31,11 @@ function DeliveryItem({ data, index }) {
       </td>
       <td>{data.recipient.city}</td>
       <td>{data.recipient.state}</td>
-      <td>ENTREGUE</td>
+      <td>
+        <StatusDelivery color={data.status.color}>
+          <span>{data.status.text}</span>
+        </StatusDelivery>
+      </td>
       <td>
         <ActionsMenu>
           <button type="button">

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import { Container } from './styles';
 
@@ -12,18 +12,45 @@ import DeliveryItem from './DeliveryItem';
 function Deliveries() {
   const [deliveries, setDeliveries] = useState([]);
 
+  function verifyStatus(delivery) {
+    if (delivery.canceled_at) {
+      delivery.status = {
+        color: '#f6f6',
+        text: 'CANCELADO',
+      };
+    } else if (delivery.end_date) {
+      delivery.status = {
+        color: '#cf6',
+        text: 'ENTREGUE',
+      };
+    } else if (delivery.start_date) {
+      delivery.status = {
+        color: '#ca6',
+        text: 'RETIRADA',
+      };
+    } else {
+      delivery.status = {
+        color: '#bbb6',
+        text: 'PENDENTE',
+      };
+    }
+
+    return delivery.status;
+  }
+
   // Modificações no state deliveries
-  const parseDeliveries = data => {
+  const parseDeliveries = useCallback(data => {
     return data.map(delivery => {
       // 1- Máscara no id: "#" e mínimo de 2 dígitos
       delivery.stringId =
         delivery.id > 9 ? `#${delivery.id}` : `#0${delivery.id}`;
 
       // 2- Status de entrega
+      delivery.status = verifyStatus(delivery);
 
       return delivery;
     });
-  };
+  }, []);
 
   // Carrega dados no state deliveries ao renderizar
   useEffect(() => {
@@ -34,7 +61,7 @@ function Deliveries() {
     }
 
     loadDeliveries();
-  }, []);
+  }, [parseDeliveries]);
 
   return (
     <Container>
