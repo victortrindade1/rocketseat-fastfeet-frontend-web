@@ -15,22 +15,22 @@ function Deliveries() {
   function verifyStatus(delivery) {
     if (delivery.canceled_at) {
       delivery.status = {
-        color: '#f6f6',
+        color: '#fab0b0',
         text: 'CANCELADO',
       };
     } else if (delivery.end_date) {
       delivery.status = {
-        color: '#cf6',
+        color: '#dff0df',
         text: 'ENTREGUE',
       };
     } else if (delivery.start_date) {
       delivery.status = {
-        color: '#ca6',
+        color: '#bad2ff',
         text: 'RETIRADA',
       };
     } else {
       delivery.status = {
-        color: '#bbb6',
+        color: '#f0f0df',
         text: 'PENDENTE',
       };
     }

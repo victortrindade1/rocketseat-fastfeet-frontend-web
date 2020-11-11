@@ -33,7 +33,7 @@ function DeliveryItem({ data, index }) {
       <td>{data.recipient.state}</td>
       <td>
         <StatusDelivery color={data.status.color}>
-          <span>{data.status.text}</span>
+          {data.status.text}
         </StatusDelivery>
       </td>
       <td>
@@ -70,18 +70,12 @@ DeliveryItem.propTypes = {
         url: PropTypes.string,
       }),
     }),
+    status: PropTypes.shape({
+      color: PropTypes.string,
+      text: PropTypes.string,
+    }),
   }).isRequired,
   index: PropTypes.number.isRequired,
 };
-
-// DeliveryItem.defaultProps = {
-//   data: PropTypes.shape({
-//     deliveryman: PropTypes.shape({
-//       avatar: PropTypes.shape({
-//         url: '',
-//       }),
-//     }),
-//   }),
-// };
 
 export default DeliveryItem;
