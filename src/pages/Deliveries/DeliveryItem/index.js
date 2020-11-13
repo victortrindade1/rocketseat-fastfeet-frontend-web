@@ -14,7 +14,6 @@ import {
 function DeliveryItem({ data, index }) {
   return (
     <tr>
-      {console.tron.log(data)}
       <td>{data.stringId}</td>
       <td>{data.recipient.name}</td>
       <td>

@@ -68,6 +68,7 @@ function Deliveries() {
       <HeaderBody
         title="Gerenciando encomendas"
         placeholder="Buscar por encomendas"
+        routeNew="/deliveries/new"
       />
       <Table>
         <thead>

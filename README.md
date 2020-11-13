@@ -12,5 +12,5 @@ https://github.com/EliasGcf/fastfeet-web
 
 # O q estou fazendo agora:
 
-Falta printar status
-formatar status
+Subpágina NewDelivery
+depois q estilizar esta subpágina, vou fazer um history.push no botão cadastrar pra essa subpage.
