@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === 'development') {
     .use(reactotronSaga())
     .connect();
 
-  tron.clear();
+  // tron.clear();
 
   console.tron = tron;
 }
