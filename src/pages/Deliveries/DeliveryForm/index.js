@@ -5,10 +5,11 @@ import { toast } from 'react-toastify';
 import BtnBack from '~/components/Button/BtnBack';
 import BtnSave from '~/components/Button/BtnSave';
 import Select from '~/components/Select';
+import Input from '~/components/Input';
 
 import api from '~/services/api';
 
-import { Container, HeaderBody, Title } from './styles';
+import { Container, HeaderBody, Title, FormContainer } from './styles';
 
 function DeliveryForm() {
   // const [delivery, setDelivery] = useState(null);
@@ -28,6 +29,7 @@ function DeliveryForm() {
 
         setRecipients(recipientResponse.data);
         setDeliveryman(deliverymanResponse.data);
+        // console.tron.log(deliverymen);
       } catch (err) {
         toast.error('Falha ao carregar dados');
       }
@@ -43,6 +45,13 @@ function DeliveryForm() {
     }));
   }, [recipients]);
 
+  const deliverymanOptions = useMemo(() => {
+    return deliverymen.map(deliveryman => ({
+      value: deliveryman,
+      label: deliveryman.name,
+    }));
+  }, [deliverymen]);
+
   function handleSubmit(data) {
     console.tron.log(data);
   }
@@ -57,7 +66,7 @@ function DeliveryForm() {
             <BtnSave type="submit" />
           </div>
         </HeaderBody>
-        <section>
+        <FormContainer>
           <Select
             name="recipient.name"
             label="Destinatário"
@@ -66,7 +75,21 @@ function DeliveryForm() {
             defaultValue=""
             onChange=""
           />
-        </section>
+          <Select
+            name="deliveryman.name"
+            label="Entregador"
+            placeholder="Selecione um entregador"
+            options={deliverymanOptions}
+            defaultValue=""
+            onChange=""
+          />
+
+          <Input
+            name="product"
+            title="Nome do produto"
+            placeholder="Ex: Livro"
+          />
+        </FormContainer>
       </Form>
     </Container>
   );

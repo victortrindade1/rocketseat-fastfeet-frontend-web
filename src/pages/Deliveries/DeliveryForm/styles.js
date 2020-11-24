@@ -22,3 +22,29 @@ export const Title = styled.div`
   font-weight: bold;
   color: ${colors.dark};
 `;
+
+export const FormContainer = styled.div`
+  width: 100%;
+  background: #fff;
+  border-radius: 4px;
+  padding: 30px 22px;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  > div {
+    padding-left: 8px;
+    padding-right: 8px;
+
+    &:nth-child(1),
+    &:nth-child(2) {
+      width: 50%;
+    }
+
+    &:last-child {
+      width: 100%;
+      margin-top: 10px;
+    }
+  }
+`;

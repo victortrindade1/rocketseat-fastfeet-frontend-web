@@ -39,7 +39,7 @@ export default function SelectComponent({
       <Select
         name={name}
         styles={customStyles}
-        isSearchable={false}
+        isSearchable // default
         options={options}
         onChange={onChange}
         defaultValue={defaultValue}
