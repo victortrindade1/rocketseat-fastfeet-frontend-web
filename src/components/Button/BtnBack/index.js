@@ -1,14 +1,19 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { MdKeyboardArrowLeft } from 'react-icons/md';
 import { Container } from './styles';
 
-function Back() {
+function BtnBack({ action }) {
   return (
-    <Container>
+    <Container onClick={action}>
       <MdKeyboardArrowLeft size={24} />
       VOLTAR
     </Container>
   );
 }
 
-export default Back;
+export default BtnBack;
+
+BtnBack.propTypes = {
+  action: PropTypes.func.isRequired,
+};

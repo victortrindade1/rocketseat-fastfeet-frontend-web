@@ -11,6 +11,7 @@ export default function SelectComponent({
   options,
   onChange,
   defaultValue,
+  noOptionsMessage,
 }) {
   const customStyles = {
     control: () => ({
@@ -21,6 +22,7 @@ export default function SelectComponent({
       width: '100%',
       padding: '0 7px',
       color: '#999',
+      fontSize: '16px',
     }),
     option: (provided, state) => ({
       ...provided,
@@ -44,6 +46,7 @@ export default function SelectComponent({
         onChange={onChange}
         defaultValue={defaultValue}
         placeholder={placeholder}
+        noOptionsMessage={noOptionsMessage}
       />
     </Container>
   );
@@ -56,4 +59,10 @@ SelectComponent.propTypes = {
   defaultValue: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   label: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
+  noOptionsMessage: PropTypes.string,
+};
+
+SelectComponent.defaultProps = {
+  defaultValue: '',
+  noOptionsMessage: '',
 };

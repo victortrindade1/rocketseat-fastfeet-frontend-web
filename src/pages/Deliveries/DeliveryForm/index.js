@@ -8,6 +8,7 @@ import Select from '~/components/Select';
 import Input from '~/components/Input';
 
 import api from '~/services/api';
+import history from '~/services/history';
 
 import { Container, HeaderBody, Title, FormContainer } from './styles';
 
@@ -15,10 +16,10 @@ function DeliveryForm() {
   // const [delivery, setDelivery] = useState(null);
   const [recipients, setRecipients] = useState([]);
   const [deliverymen, setDeliveryman] = useState([]);
-  // const [selectedRecipient, setSelectedRecipient] = useState(null);
-  // const [selectedDeliveryman, setSelectedDeliveryman] = useState(null);
+  const [selectedRecipient, setSelectedRecipient] = useState(null);
+  const [selectedDeliveryman, setSelectedDeliveryman] = useState(null);
 
-  // Carrega dados na tela
+  // Carrega Entregadores e Destinatários
   useEffect(() => {
     async function loadData() {
       try {
@@ -52,8 +53,42 @@ function DeliveryForm() {
     }));
   }, [deliverymen]);
 
-  function handleSubmit(data) {
-    console.tron.log(data);
+  async function handleSubmit(data) {
+    if (!selectedRecipient || !selectedDeliveryman || !data.product) {
+      toast.error('Preencha todo o formulário');
+      return;
+    }
+
+    data.recipient_id = selectedRecipient.id;
+    data.deliveryman_id = selectedDeliveryman.id;
+
+    try {
+      await api.post('/deliveries', data);
+
+      toast.success('Encomenda criada com sucesso!');
+
+      history.push('/deliveries');
+    } catch (error) {
+      console.tron.log(error);
+      toast.error(
+        'Não foi possível realizar o cadastro. Verifique seus dados.'
+      );
+    }
+  }
+
+  function handleGoBack(e) {
+    e.preventDefault(); // Cancela submit do form
+
+    // history.goBack(); // ou history.push('/deliveries');
+    history.push('/deliveries');
+  }
+
+  function handleChangeRecipient(data) {
+    setSelectedRecipient(data.value);
+  }
+
+  function handleChangeDeliveryman(data) {
+    setSelectedDeliveryman(data.value);
   }
 
   return (
@@ -62,26 +97,28 @@ function DeliveryForm() {
         <HeaderBody>
           <Title>Cadastro de encomendas</Title>
           <div>
-            <BtnBack />
+            <BtnBack type="button" action={handleGoBack} />
             <BtnSave type="submit" />
           </div>
         </HeaderBody>
         <FormContainer>
           <Select
-            name="recipient.name"
+            name="recipient"
             label="Destinatário"
             placeholder="Selecione um destinatário"
             options={recipientsOptions}
             defaultValue=""
-            onChange=""
+            onChange={handleChangeRecipient}
+            noOptionsMessage={() => 'Nenhum destinatário encontrado'}
           />
           <Select
-            name="deliveryman.name"
+            name="deliveryman"
             label="Entregador"
             placeholder="Selecione um entregador"
             options={deliverymanOptions}
             defaultValue=""
-            onChange=""
+            onChange={handleChangeDeliveryman}
+            noOptionsMessage={() => 'Nenhum deliveryman encontrado'}
           />
 
           <Input
