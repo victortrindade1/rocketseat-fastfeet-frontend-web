@@ -26,24 +26,24 @@ export const ActionList = styled.div`
   width: 150px;
   left: calc(50% - 75px);
   top: calc(100% + 5px);
-  background: rgb(245, 245, 245);
+  background: #fff;
   border-radius: 4px;
   padding: 15px 5px;
-  box-shadow: 0px 0px 2px #00000026;
+  box-shadow: 0px 0px 10px #00000026;
   display: ${props => (props.visible ? 'block' : 'none')};
   padding: 20px 10px;
   z-index: 2;
 
   &::before {
-    content: '';
+    content: '▲';
     position: absolute;
-    left: calc(50% - 10px);
-    top: -10px;
-    width: 0;
-    height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid rgb(245, 245, 245);
+    left: calc(50% - 5px);
+    top: -15px;
+    width: 15px;
+    height: 15px;
+    font-size: 20px;
+    text-shadow: 0px -5px 10px #00000057;
+    color: #fff;
   }
 
   button {
