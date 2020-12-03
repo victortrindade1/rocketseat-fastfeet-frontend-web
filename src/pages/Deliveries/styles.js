@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-// import { colors } from '~/styles/colors';
+import { lighten } from 'polished';
+import { colors } from '~/styles/colors';
 
 export const Container = styled.div`
   height: 100%;
@@ -10,4 +11,31 @@ export const Container = styled.div`
   /* Centraliza div */
 `;
 
-export const TableDeliveries = styled.div``;
+export const Pagination = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  > button {
+    background: none;
+    border: none;
+    color: ${colors.primary};
+    border-radius: 50%;
+
+    &[disabled] {
+      opacity: 0.6;
+      cursor: default;
+    }
+
+    &:not([disabled]):hover {
+      background: ${lighten(0.3, colors.primary)};
+    }
+  }
+
+  > span {
+    padding: 0 15px;
+    color: ${colors.primary};
+    font-size: 16px;
+    font-weight: bold;
+  }
+`;

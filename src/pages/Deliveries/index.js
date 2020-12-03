@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
-
-import { Container } from './styles';
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
+import { Container, Pagination } from './styles';
 
 import HeaderBody from '~/components/HeaderBody';
 import Table from '~/components/Table';
@@ -11,7 +11,10 @@ import DeliveryItem from './DeliveryItem';
 
 function Deliveries() {
   const [deliveries, setDeliveries] = useState([]);
+  const [page, setPage] = useState(1);
+  const [pages, setPages] = useState(0);
 
+  // seta delivery.status
   function verifyStatus(delivery) {
     if (delivery.canceled_at) {
       delivery.status = {
@@ -52,16 +55,33 @@ function Deliveries() {
     });
   }, []);
 
+  async function handlePagination(action) {
+    if (action === 'back') {
+      await setPage(page - 1);
+    } else {
+      await setPage(page + 1);
+    }
+  }
+
   // Carrega dados no state deliveries ao renderizar
   useEffect(() => {
     async function loadDeliveries() {
-      const response = await api.get('deliveries');
-      const data = parseDeliveries(response.data);
+      const response = await api.get('deliveries', {
+        params: {
+          page,
+        },
+      });
+
+      // Incrementa máscara no id e adiciona status
+      const data = parseDeliveries(response.data.items);
       setDeliveries(data);
+
+      // Total de páginas (para bloquear botão "próximo" da última page)
+      setPages(response.data.pages);
     }
 
     loadDeliveries();
-  }, [parseDeliveries]);
+  }, [page, parseDeliveries]);
 
   return (
     <Container>
@@ -90,6 +110,23 @@ function Deliveries() {
           })}
         </tbody>
       </Table>
+      <Pagination>
+        <button
+          type="button"
+          disabled={page < 2}
+          onClick={() => handlePagination('back')}
+        >
+          <MdKeyboardArrowLeft size={50} />
+        </button>
+        <span>{page}</span>
+        <button
+          type="button"
+          disabled={page >= pages}
+          onClick={() => handlePagination('next')}
+        >
+          <MdKeyboardArrowRight size={50} />
+        </button>
+      </Pagination>
     </Container>
   );
 }

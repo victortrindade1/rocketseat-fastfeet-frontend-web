@@ -12,7 +12,7 @@ https://github.com/EliasGcf/fastfeet-web
 
 # O q estou fazendo agora:
 
-Terminei "Cadastrar" do DeliveryForm.
+Vou Transformar a paginação em component. ;)
 
 Falta:
 Visualizar
