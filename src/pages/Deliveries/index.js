@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
-import { Container, Pagination } from './styles';
+// import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 
 import HeaderBody from '~/components/HeaderBody';
 import Table from '~/components/Table';
+import Pagination from '~/components/Pagination';
+
+// import { Container, Pagination } from './styles';
+import { Container } from './styles';
 
 import api from '~/services/api';
 
@@ -55,12 +58,9 @@ function Deliveries() {
     });
   }, []);
 
-  async function handlePagination(action) {
-    if (action === 'back') {
-      await setPage(page - 1);
-    } else {
-      await setPage(page + 1);
-    }
+  // Seta a page. O argumento n é o state page modificado no callback de Pagination
+  async function handlePagination(n) {
+    await setPage(n);
   }
 
   // Carrega dados no state deliveries ao renderizar
@@ -110,23 +110,7 @@ function Deliveries() {
           })}
         </tbody>
       </Table>
-      <Pagination>
-        <button
-          type="button"
-          disabled={page < 2}
-          onClick={() => handlePagination('back')}
-        >
-          <MdKeyboardArrowLeft size={50} />
-        </button>
-        <span>{page}</span>
-        <button
-          type="button"
-          disabled={page >= pages}
-          onClick={() => handlePagination('next')}
-        >
-          <MdKeyboardArrowRight size={50} />
-        </button>
-      </Pagination>
+      <Pagination page={page} pages={pages} callback={handlePagination} />
     </Container>
   );
 }

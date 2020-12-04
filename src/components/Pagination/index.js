@@ -1,20 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 
-import {
-  MdFirstPage,
-  MdChevronLeft,
-  MdChevronRight,
-  MdLastPage,
-} from 'react-icons/md';
+import { Container } from './styles';
 
-import { Container, Text, Buttons, Button } from './styles';
-
-function Pagination({ total = 0, pages = 1, page = 1, callback }) {
-  function handleFirstPage() {
-    callback(1);
-  }
-
+function Pagination({ page = 1, pages = 1, callback }) {
   function handlePrevPage() {
     callback(page - 1);
   }
@@ -23,28 +13,15 @@ function Pagination({ total = 0, pages = 1, page = 1, callback }) {
     callback(page + 1);
   }
 
-  function handleLastPage() {
-    callback(pages);
-  }
-
   return (
     <Container>
-      <Text>{total} registros</Text>
-      <Buttons>
-        <Button disabled={page === 1} onClick={handleFirstPage}>
-          <MdFirstPage color="#FFF" size={20} />
-        </Button>
-        <Button disabled={page === 1} onClick={handlePrevPage}>
-          <MdChevronLeft color="#FFF" size={20} />
-        </Button>
-        <Text>{`${page} / ${pages}`}</Text>
-        <Button disabled={page === pages} onClick={handleNextPage}>
-          <MdChevronRight color="#FFF" size={20} />
-        </Button>
-        <Button disabled={page === pages} onClick={handleLastPage}>
-          <MdLastPage color="#FFF" size={20} />
-        </Button>
-      </Buttons>
+      <button type="button" disabled={page < 2} onClick={handlePrevPage}>
+        <MdKeyboardArrowLeft size={40} />
+      </button>
+      <span>{page}</span>
+      <button type="button" disabled={page >= pages} onClick={handleNextPage}>
+        <MdKeyboardArrowRight size={40} />
+      </button>
     </Container>
   );
 }
@@ -52,14 +29,12 @@ function Pagination({ total = 0, pages = 1, page = 1, callback }) {
 export default Pagination;
 
 Pagination.defaultProps = {
-  total: 0,
-  pages: 1,
   page: 1,
+  pages: 1,
 };
 
 Pagination.propTypes = {
-  total: PropTypes.number,
-  pages: PropTypes.number,
   page: PropTypes.number,
+  pages: PropTypes.number,
   callback: PropTypes.func.isRequired,
 };
