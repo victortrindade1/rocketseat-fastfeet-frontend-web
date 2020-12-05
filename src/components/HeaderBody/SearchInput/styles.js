@@ -1,7 +1,15 @@
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import { Form as FormUnform, Input as InputUnform } from 'unform';
 
 import { colors } from '~/styles/colors';
+
+const rotate = keyframes`
+  from{
+    transform: rotate(0deg);
+  }to{
+    transform: rotate(360deg);
+  }
+`;
 
 export const Form = styled(FormUnform)`
   background: #fff;
@@ -17,10 +25,16 @@ export const Form = styled(FormUnform)`
 export const SearchIcon = styled.div`
   padding: 0px 5px 0px 10px;
 
-  svg {
+  > svg {
     color: ${colors.secondary};
     width: 18px;
     height: auto;
+
+    ${props =>
+      props.searching &&
+      css`
+      animation ${rotate} 1s linear infinite;
+    `}
   }
 `;
 

@@ -16,6 +16,7 @@ function Deliveries() {
   const [deliveries, setDeliveries] = useState([]);
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState(0);
+  const [searchText, setSearchText] = useState('');
 
   // seta delivery.status
   function verifyStatus(delivery) {
@@ -60,17 +61,32 @@ function Deliveries() {
 
   // Seta a page. O argumento n é o state page modificado no callback de Pagination
   async function handlePagination(n) {
-    await setPage(n);
+    const params = {
+      page: n,
+      q: searchText,
+    };
+
+    const response = await api.get('deliveries', { params });
+    const data = parseDeliveries(response.data.items);
+    setDeliveries(data);
+    setPage(response.data.page);
+    setPages(response.data.pages);
+  }
+
+  async function handleSearch(search) {
+    // search vem do callback de SearchInput
+    const response = await api.get(`deliveries?q=${search}`);
+    const data = parseDeliveries(response.data.items);
+    setDeliveries(data);
+    setPage(response.data.page);
+    setPages(response.data.pages);
+    setSearchText(search);
   }
 
   // Carrega dados no state deliveries ao renderizar
   useEffect(() => {
     async function loadDeliveries() {
-      const response = await api.get('deliveries', {
-        params: {
-          page,
-        },
-      });
+      const response = await api.get('deliveries');
 
       // Incrementa máscara no id e adiciona status
       const data = parseDeliveries(response.data.items);
@@ -78,10 +94,11 @@ function Deliveries() {
 
       // Total de páginas (para bloquear botão "próximo" da última page)
       setPages(response.data.pages);
+      setPage(response.data.page);
     }
 
     loadDeliveries();
-  }, [page, parseDeliveries]);
+  }, [parseDeliveries]);
 
   return (
     <Container>
@@ -89,6 +106,7 @@ function Deliveries() {
         title="Gerenciando encomendas"
         placeholder="Buscar por encomendas"
         routeNew="/deliveries/new"
+        callback={handleSearch}
       />
       <Table>
         <thead>
