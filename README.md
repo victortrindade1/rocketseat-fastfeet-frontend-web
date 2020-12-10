@@ -12,7 +12,10 @@ https://github.com/EliasGcf/fastfeet-web
 
 # O q estou fazendo agora:
 
+Tenho q consertar o formato das datas do modal
+Vou consertar o backend. O Signature é do recipient. Falta fazer a conexao das tabelas pra q venha signature nos dados de recipient.
+
 Falta:
-Visualizar
+Visualizar - falta automatizar
 Editar
 Excluir

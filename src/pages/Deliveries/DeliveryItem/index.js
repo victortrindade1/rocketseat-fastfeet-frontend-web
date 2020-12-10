@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { MdRemoveRedEye, MdEdit, MdDeleteForever } from 'react-icons/md';
 
 import Avatar from '~/components/Avatar';
 import ActionsMenu from '~/components/ActionsMenu';
+import SimpleModal from '~/components/SimpleModal';
+
+import ShowDelivery from '~/pages/Deliveries/ShowDelivery';
 
 import {
   DeliverymanContainer,
@@ -12,46 +15,65 @@ import {
 } from './styles';
 
 function DeliveryItem({ data, index }) {
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
+
   return (
-    <tr>
-      <td>{data.stringId}</td>
-      <td>{data.recipient.name}</td>
-      <td>
-        <DeliverymanContainer>
-          <Avatar
-            url={data.deliveryman.avatar ? data.deliveryman.avatar.url : ''}
-            name={data.deliveryman.name}
-            index={index}
-          />
-          <DeliverymanName>
-            <span>{data.deliveryman.name}</span>
-          </DeliverymanName>
-        </DeliverymanContainer>
-      </td>
-      <td>{data.recipient.city}</td>
-      <td>{data.recipient.state}</td>
-      <td>
-        <StatusDelivery color={data.status.color}>
-          {data.status.text}
-        </StatusDelivery>
-      </td>
-      <td>
-        <ActionsMenu>
-          <button type="button">
-            <MdRemoveRedEye size={24} color="#8E5BE8" />
-            Visualizar
-          </button>
-          <button type="button">
-            <MdEdit size={24} color="#4D85EE" />
-            Editar
-          </button>
-          <button type="button">
-            <MdDeleteForever size={24} color="#DE3B3B" />
-            Excluir
-          </button>
-        </ActionsMenu>
-      </td>
-    </tr>
+    <>
+      <tr>
+        <td>{data.stringId}</td>
+        <td>{data.recipient.name}</td>
+        <td>
+          <DeliverymanContainer>
+            <Avatar
+              url={data.deliveryman.avatar ? data.deliveryman.avatar.url : ''}
+              name={data.deliveryman.name}
+              index={index}
+            />
+            <DeliverymanName>
+              <span>{data.deliveryman.name}</span>
+            </DeliverymanName>
+          </DeliverymanContainer>
+        </td>
+        <td>{data.recipient.city}</td>
+        <td>{data.recipient.state}</td>
+        <td>
+          <StatusDelivery color={data.status.color}>
+            {data.status.text}
+          </StatusDelivery>
+        </td>
+        <td>
+          <ActionsMenu>
+            <button type="button" onClick={handleOpenModal}>
+              <MdRemoveRedEye size={24} color="#8E5BE8" />
+              Visualizar
+            </button>
+            <button type="button">
+              <MdEdit size={24} color="#4D85EE" />
+              Editar
+            </button>
+            <button type="button">
+              <MdDeleteForever size={24} color="#DE3B3B" />
+              Excluir
+            </button>
+          </ActionsMenu>
+        </td>
+      </tr>
+      <SimpleModal open={openModal} handleClose={handleCloseModal}>
+        <ShowDelivery
+          recipient={data.recipient}
+          start={data.start_date}
+          finish={data.end_date}
+        />
+      </SimpleModal>
+    </>
   );
 }
 
