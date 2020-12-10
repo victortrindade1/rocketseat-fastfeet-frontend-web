@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { parseISO, format } from 'date-fns';
 
 import { Container, Div, Title, Text, Signature } from './styles';
 
 function ShowDelivery({ recipient, start, finish }) {
+  const dateStart = start && format(parseISO(start), 'dd/MM/yyyy');
+  const dateFinish = finish && format(parseISO(finish), 'dd/MM/yyyy');
+
   return (
     <Container>
       <Div>
@@ -21,11 +25,11 @@ function ShowDelivery({ recipient, start, finish }) {
         <Title>Datas</Title>
         <Text>
           <strong>Retirada:</strong>
-          {start}
+          {dateStart}
         </Text>
         <Text>
           <strong>Entrega:</strong>
-          {finish}
+          {dateFinish}
         </Text>
       </Div>
       <Div>

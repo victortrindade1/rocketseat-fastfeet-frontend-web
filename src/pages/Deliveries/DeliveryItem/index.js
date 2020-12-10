@@ -95,6 +95,8 @@ DeliveryItem.propTypes = {
       color: PropTypes.string,
       text: PropTypes.string,
     }),
+    start_date: PropTypes.string,
+    end_date: PropTypes.string,
   }).isRequired,
   index: PropTypes.number.isRequired,
 };
