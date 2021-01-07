@@ -2,40 +2,48 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { parseISO, format } from 'date-fns';
 
-import { Container, Div, Title, Text, Signature } from './styles';
+import { Container, Div, Title, Text, Signature, Scroll } from './styles';
 
-function ShowDelivery({ recipient, start, finish }) {
+function ShowDelivery({ recipient, start, finish, signature }) {
   const dateStart = start && format(parseISO(start), 'dd/MM/yyyy');
   const dateFinish = finish && format(parseISO(finish), 'dd/MM/yyyy');
 
   return (
     <Container>
-      <Div>
-        <Title>Informações da encomenda</Title>
-        <Text>
-          {recipient.street}, {recipient.number}
-        </Text>
-        <Text>{recipient.complement}</Text>
-        <Text>
-          {recipient.city} - {recipient.state}
-        </Text>
-        <Text>{recipient.zipcode}</Text>
-      </Div>
-      <Div>
-        <Title>Datas</Title>
-        <Text>
-          <strong>Retirada:</strong>
-          {dateStart}
-        </Text>
-        <Text>
-          <strong>Entrega:</strong>
-          {dateFinish}
-        </Text>
-      </Div>
-      <Div>
-        <Title>Assinatura do destinatário</Title>
-        <Signature />
-      </Div>
+      <Scroll>
+        <Div>
+          <Title>Informações da encomenda</Title>
+          <Text>
+            {recipient.street}, {recipient.number}
+          </Text>
+          <Text>{recipient.complement}</Text>
+          <Text>
+            {recipient.city} - {recipient.state}
+          </Text>
+          <Text>{recipient.zipcode}</Text>
+        </Div>
+        {dateStart && (
+          <Div>
+            <Title>Datas</Title>
+            <Text>
+              <strong>Retirada:</strong>
+              {dateStart}
+            </Text>
+            <Text>
+              <strong>Entrega:</strong>
+              {dateFinish}
+            </Text>
+          </Div>
+        )}
+
+        {signature && (
+          <Div>
+            <Title>Assinatura do destinatário</Title>
+
+            <Signature url={signature} />
+          </Div>
+        )}
+      </Scroll>
     </Container>
   );
 }
@@ -53,9 +61,13 @@ ShowDelivery.propTypes = {
   }).isRequired,
   start: PropTypes.string,
   finish: PropTypes.string,
+  signature: PropTypes.shape({
+    url: PropTypes.string,
+  }),
 };
 
 ShowDelivery.defaultProps = {
   start: '',
   finish: '',
+  signature: '',
 };

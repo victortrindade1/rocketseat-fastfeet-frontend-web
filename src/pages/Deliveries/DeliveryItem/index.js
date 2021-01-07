@@ -33,7 +33,7 @@ function DeliveryItem({ data, index }) {
         <td>
           <DeliverymanContainer>
             <Avatar
-              url={data.deliveryman.avatar ? data.deliveryman.avatar.url : ''}
+              url={data.deliveryman.avatar ? data.deliveryman.avatar.url : null}
               name={data.deliveryman.name}
               index={index}
             />
@@ -71,6 +71,7 @@ function DeliveryItem({ data, index }) {
           recipient={data.recipient}
           start={data.start_date}
           finish={data.end_date}
+          signature={data.signature ? data.signature.url : null}
         />
       </SimpleModal>
     </>
@@ -97,6 +98,7 @@ DeliveryItem.propTypes = {
     }),
     start_date: PropTypes.string,
     end_date: PropTypes.string,
+    signature: PropTypes.string,
   }).isRequired,
   index: PropTypes.number.isRequired,
 };

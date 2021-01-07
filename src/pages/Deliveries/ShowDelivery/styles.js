@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import PerfectScrollbar from 'react-perfect-scrollbar';
 
 const containerAppear = keyframes`
   0% {
@@ -16,6 +17,8 @@ const containerAppear = keyframes`
 
 export const Container = styled.div`
   max-height: 70%;
+  min-height: 30%;
+  height: auto;
   max-width: 30%;
   background: #fff;
   padding: 15px;
@@ -33,6 +36,7 @@ export const Container = styled.div`
 export const Div = styled.div`
   border-bottom: 1px solid #eee;
   padding: 4px 0px;
+  height: auto;
 
   :last-child {
     border: none;
@@ -56,4 +60,16 @@ export const Text = styled.div`
   }
 `;
 
-export const Signature = styled.div``;
+export const Signature = styled.img.attrs(props => ({
+  src: props.url,
+  alt: 'signature',
+}))`
+  height: auto;
+  width: 100%;
+  object-fit: contain;
+`;
+
+export const Scroll = styled(PerfectScrollbar)`
+  max-height: 90vh;
+  /* padding: 25px; */
+`;
