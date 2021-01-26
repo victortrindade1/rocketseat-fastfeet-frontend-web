@@ -2,7 +2,7 @@ import React from 'react';
 import { MdDone } from 'react-icons/md';
 import { Container } from './styles';
 
-function BtnSave() {
+function SaveButton() {
   return (
     <Container>
       <MdDone size={24} />
@@ -11,4 +11,4 @@ function BtnSave() {
   );
 }
 
-export default BtnSave;
+export default SaveButton;

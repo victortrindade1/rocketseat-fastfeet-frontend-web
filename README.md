@@ -12,10 +12,22 @@ https://github.com/EliasGcf/fastfeet-web
 
 # O q estou fazendo agora:
 
-Acabei de consertar o formato das datas do modal.
-Vou consertar o backend. O Signature é do recipient. Falta fazer a conexao das tabelas pra q venha signature nos dados de recipient.
+Estou no Select. Tenho q tb consertar o handleSubmit do form.
+
+Vou copiar o HeaderList do Elias, e tb o searchInput q está bem menor, e procura a cada digitada.
+O SearchInput está dando cachorro. Eu acho q é pq o useField não encontra pq está tendo drilling props por causa do HeaderBody.
+
+Vou tirar o HeaderBody!
+
+Estou trocando os components dos Forms pelos do Unform/core e unform/web. Isto pq o react-select não carrega os dados do jeito antigo. Terminei de substituir o Input. Agora falta o select, o searchinput, e se eu quiser, o photoinput, e outros se quiser...
+
+Vou fazer o "Editar".
+
+- Será na msm page de cadastro
+- Vai alimentar os dados do form
+- A rota é 'deliveries/new/:id'.
+- Tenho que inspecionar os botões "Voltar" e "Salvar"
 
 Falta:
-Visualizar - falta automatizar (fazendo)
 Editar
 Excluir

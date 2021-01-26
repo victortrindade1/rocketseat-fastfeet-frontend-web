@@ -35,6 +35,7 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'warn',
     'react/jsx-props-no-spreading': 'off',
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    "react/require-default-props": "off",
   },
   settings: {
     'import/resolver': {

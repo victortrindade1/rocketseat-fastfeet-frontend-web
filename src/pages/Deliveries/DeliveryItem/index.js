@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { MdRemoveRedEye, MdEdit, MdDeleteForever } from 'react-icons/md';
+import history from '~/services/history';
 
 import Avatar from '~/components/Avatar';
 import ActionsMenu from '~/components/ActionsMenu';
@@ -23,6 +24,11 @@ function DeliveryItem({ data, index }) {
 
   const handleCloseModal = () => {
     setOpenModal(false);
+  };
+
+  const handleEdit = () => {
+    // id da encomenda
+    history.push(`/deliveries/edit/${data.id}`);
   };
 
   return (
@@ -55,7 +61,7 @@ function DeliveryItem({ data, index }) {
               <MdRemoveRedEye size={24} color="#8E5BE8" />
               Visualizar
             </button>
-            <button type="button">
+            <button type="button" onClick={handleEdit}>
               <MdEdit size={24} color="#4D85EE" />
               Editar
             </button>
@@ -80,6 +86,7 @@ function DeliveryItem({ data, index }) {
 
 DeliveryItem.propTypes = {
   data: PropTypes.shape({
+    id: PropTypes.string.isRequired,
     stringId: PropTypes.string.isRequired,
     recipient: PropTypes.shape({
       name: PropTypes.string.isRequired,
@@ -98,7 +105,7 @@ DeliveryItem.propTypes = {
     }),
     start_date: PropTypes.string,
     end_date: PropTypes.string,
-    signature: PropTypes.string,
+    signature: PropTypes.object,
   }).isRequired,
   index: PropTypes.number.isRequired,
 };

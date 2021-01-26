@@ -1,12 +1,16 @@
 import React, { useState, useEffect, useCallback } from 'react';
-// import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
+import { MdAdd } from 'react-icons/md';
+
+import history from '~/services/history';
 
 import HeaderBody from '~/components/HeaderBody';
 import Table from '~/components/Table';
 import Pagination from '~/components/Pagination';
+import SearchInput from '~/components/Form/SearchInput';
+import IconButton from '~/components/Button/IconButton';
 
 // import { Container, Pagination } from './styles';
-import { Container } from './styles';
+import { Container, Content } from './styles';
 
 import api from '~/services/api';
 
@@ -73,9 +77,13 @@ function Deliveries() {
     setPages(response.data.pages);
   }
 
-  async function handleSearch(search) {
-    // search vem do callback de SearchInput
-    const response = await api.get(`deliveries?q=${search}`);
+  async function handleSearch(e) {
+    const search = e.target.value;
+    const response = await api.get('/deliveries', {
+      params: {
+        q: search,
+      },
+    });
     const data = parseDeliveries(response.data.items);
     setDeliveries(data);
     setPage(response.data.page);
@@ -102,33 +110,42 @@ function Deliveries() {
 
   return (
     <Container>
-      <HeaderBody
-        title="Gerenciando encomendas"
-        placeholder="Buscar por encomendas"
-        routeNew="/deliveries/new"
-        callback={handleSearch}
-      />
-      <Table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Destinatário</th>
-            <th>Entregador</th>
-            <th>Cidade</th>
-            <th>Estado</th>
-            <th>Status</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          {deliveries.map((delivery, index) => {
-            return (
-              <DeliveryItem key={delivery.id} data={delivery} index={index} />
-            );
-          })}
-        </tbody>
-      </Table>
-      <Pagination page={page} pages={pages} callback={handlePagination} />
+      <Content>
+        <HeaderBody title="Gerenciando encomendas">
+          <SearchInput
+            onChange={handleSearch}
+            type="text"
+            placeholder="Buscar por encomendas"
+          />
+          <IconButton
+            Icon={MdAdd}
+            title="CADASTRAR"
+            action={() => history.push('/deliveries/new')}
+            type="button"
+          />
+        </HeaderBody>
+        <Table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Destinatário</th>
+              <th>Entregador</th>
+              <th>Cidade</th>
+              <th>Estado</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {deliveries.map((delivery, index) => {
+              return (
+                <DeliveryItem key={delivery.id} data={delivery} index={index} />
+              );
+            })}
+          </tbody>
+        </Table>
+        <Pagination page={page} pages={pages} callback={handlePagination} />
+      </Content>
     </Container>
   );
 }

@@ -59,19 +59,6 @@ export const Login = styled.div`
     font-size: 14px;
   }
 
-  input {
-    padding: 12px 15px 12px 15px;
-    border-radius: 4px;
-    border: 1px solid #dddddd;
-    opacity: 1;
-    font-size: 16px;
-    color: #555555;
-
-    ::placeholder {
-      color: ${colors.secondary};
-    }
-  }
-
   button {
     margin-top: 15px;
     background: ${colors.primary};

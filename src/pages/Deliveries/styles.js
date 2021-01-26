@@ -2,13 +2,24 @@ import styled from 'styled-components';
 import { lighten } from 'polished';
 import { colors } from '~/styles/colors';
 
-export const Container = styled.div`
-  height: 100%;
+// export const Container = styled.div`
+//   height: 100%;
 
-  /* Centraliza div */
-  max-width: 80%;
-  margin: 0 auto;
-  /* Centraliza div */
+//   /* Centraliza div */
+//   max-width: 80%;
+//   margin: 0 auto;
+//   /* Centraliza div */
+// `;
+export const Container = styled.div`
+  display: flex;
+  justify-content: center;
+
+  padding: 0 120px;
+`;
+
+export const Content = styled.div`
+  width: 100%;
+  max-width: 1200px;
 `;
 
 export const Pagination = styled.div`

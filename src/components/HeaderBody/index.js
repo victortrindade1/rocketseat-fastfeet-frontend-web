@@ -1,43 +1,24 @@
 import React from 'react';
+
 import PropTypes from 'prop-types';
-import { MdAdd } from 'react-icons/md';
 
-import history from '~/services/history';
+import { Container, Content } from './styles';
 
-import { Div } from './styles';
-
-import PageTitle from './PageTitle';
-import SearchInput from './SearchInput';
-
-function HeaderBody({ title, placeholder, routeNew, callback }) {
+export default function HeaderBody({ title, children }) {
   return (
-    <header>
-      <PageTitle title={title} />
-      <Div placeholder={placeholder}>
-        {/* Se não tiver placeholder, não mostra SearchInput (page Problems) */}
-        {placeholder ? (
-          <SearchInput callback={callback} placeholder={placeholder} />
-        ) : null}
+    <Container>
+      <h1>{title}</h1>
 
-        <button type="button" onClick={() => history.push(routeNew)}>
-          <MdAdd />
-          CADASTRAR
-        </button>
-      </Div>
-    </header>
+      {children && <Content>{children}</Content>}
+    </Container>
   );
 }
 
 HeaderBody.propTypes = {
   title: PropTypes.string.isRequired,
-  placeholder: PropTypes.string,
-  routeNew: PropTypes.string,
-  callback: PropTypes.func.isRequired,
+  children: PropTypes.arrayOf(PropTypes.element),
 };
 
 HeaderBody.defaultProps = {
-  placeholder: '',
-  routeNew: '',
+  children: null,
 };
-
-export default HeaderBody;

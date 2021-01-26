@@ -2,13 +2,11 @@ import React from 'react';
 
 import { Container } from './styles';
 
-import HeaderBody from '~/components/HeaderBody';
+// import HeaderBody from '~/components/HeaderBody';
 
 function Problems() {
   return (
-    <Container>
-      <HeaderBody title="Gerenciando problemas" />
-    </Container>
+    <Container>{/* <HeaderBody title="Gerenciando problemas" /> */}</Container>
   );
 }
 

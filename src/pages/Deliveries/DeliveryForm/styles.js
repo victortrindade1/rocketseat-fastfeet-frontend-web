@@ -2,9 +2,13 @@ import styled from 'styled-components';
 import { colors } from '~/styles/colors';
 
 export const Container = styled.div`
-  height: 100%;
-  width: 80%;
-  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+`;
+
+export const Content = styled.div`
+  width: 100%;
+  max-width: 900px;
 `;
 
 export const HeaderBody = styled.div`

@@ -2,15 +2,15 @@ import React from 'react';
 
 import { Container } from './styles';
 
-import HeaderBody from '~/components/HeaderBody';
+// import HeaderBody from '~/components/HeaderBody';
 
 function Recipients() {
   return (
     <Container>
-      <HeaderBody
+      {/* <HeaderBody
         title="Gerenciando destinatários"
         placeholder="Buscar por destinatários"
-      />
+      /> */}
     </Container>
   );
 }

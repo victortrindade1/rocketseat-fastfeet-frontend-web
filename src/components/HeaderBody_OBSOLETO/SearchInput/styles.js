@@ -1,5 +1,5 @@
 import styled, { keyframes, css } from 'styled-components';
-import { Form as FormUnform, Input as InputUnform } from 'unform';
+import { Form as FormUnform } from '@unform/web';
 
 import { colors } from '~/styles/colors';
 
@@ -38,9 +38,18 @@ export const SearchIcon = styled.div`
   }
 `;
 
-export const Input = styled(InputUnform)`
+export const Input = styled.input`
   font-size: 14px;
   color: ${colors.secondary};
   border: none;
   height: 100%;
+`;
+
+export const Error = styled.span`
+  color: ${colors.danger};
+  margin-top: 8px;
+
+  & + label {
+    margin-top: 8px;
+  }
 `;

@@ -63,6 +63,6 @@ SelectComponent.propTypes = {
 };
 
 SelectComponent.defaultProps = {
-  defaultValue: '',
+  // defaultValue: '',
   noOptionsMessage: '',
 };

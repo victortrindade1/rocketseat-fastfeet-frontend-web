@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Input as UnInput } from 'unform';
+import { Input as UnInput } from '@rocketseat/unform';
 
 export const Container = styled.div`
   padding-bottom: 10px;

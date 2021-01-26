@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { MdKeyboardArrowLeft } from 'react-icons/md';
 import { Container } from './styles';
 
-function BtnBack({ action }) {
+function BackButton({ action }) {
   return (
     <Container onClick={action}>
       <MdKeyboardArrowLeft size={24} />
@@ -12,8 +12,8 @@ function BtnBack({ action }) {
   );
 }
 
-export default BtnBack;
+export default BackButton;
 
-BtnBack.propTypes = {
+BackButton.propTypes = {
   action: PropTypes.func.isRequired,
 };
