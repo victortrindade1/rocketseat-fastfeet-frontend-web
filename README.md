@@ -12,6 +12,8 @@ https://github.com/EliasGcf/fastfeet-web
 
 # O q estou fazendo agora:
 
+Fiz Select. Agora tenho q ajeitar o DeliveryForm, ver seu submit, e finalmente ir pra edição!
+
 Estou no Select. Tenho q tb consertar o handleSubmit do form.
 
 Vou copiar o HeaderList do Elias, e tb o searchInput q está bem menor, e procura a cada digitada.

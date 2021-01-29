@@ -1,174 +1,169 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
+import * as Yup from 'yup';
 import { PropTypes } from 'prop-types';
-import { Form } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
 
+import HeaderForm from '~/components/HeaderForm';
 import BackButton from '~/components/Button/BackButton';
 import SaveButton from '~/components/Button/SaveButton';
-import Select from '~/components/Select';
-import Input from '~/components/Input';
+import Input from '~/components/Form/Input';
+import AsyncSelectInput from '~/components/Form/AsyncSelectInput';
 
 import api from '~/services/api';
 import history from '~/services/history';
 
-import { Container, Content, HeaderBody, Title, FormContainer } from './styles';
+import { Container, Content, UnForm } from './styles';
 
 function DeliveryForm({ match }) {
   const { id } = match.params;
 
   const formRef = useRef(null);
 
-  const [delivery, setDelivery] = useState(null);
-  const [recipients, setRecipients] = useState([]);
-  const [deliverymen, setDeliveryman] = useState([]);
-  const [selectedRecipient, setSelectedRecipient] = useState(null);
-  const [selectedDeliveryman, setSelectedDeliveryman] = useState(null);
-  const [defaultValueRecipient, setDefaultValueRecipient] = useState(null);
-
-  // Carrega Entregadores e Destinatários
+  // Rota p/ edição. Carrega dados iniciais
   useEffect(() => {
-    async function loadData() {
-      try {
-        const [recipientResponse, deliverymanResponse] = await Promise.all([
-          api.get('recipients', { params: { limit: 300 } }),
-          api.get('deliverymen', { params: { limit: 300 } }),
-        ]);
+    async function loadInitialData(deliveryId) {
+      if (id) {
+        const response = await api.get(`/deliveries/${deliveryId}`);
 
-        setRecipients(recipientResponse.data);
-        setDeliveryman(deliverymanResponse.data);
+        // Neste caso, só vai popular o input. O Unform rastreia pelo nome q vem
+        // da api, e popula onde tem msm nome na prop name do component
+        formRef.current.setData(response.data);
 
-        // // Se for edição
-        // if (id) {
-        //   const { data } = await api.get(`deliveries/${id}`);
-        //   console.tron.log(data);
-
-        //   // formRef.current.setData({
-        //   //   recipient: data.recipient,
-
-        //   // });
-
-        //   setDelivery(data);
-        //   setSelectedRecipient(data.recipient);
-        //   setSelectedDeliveryman(data.deliveryman);
-
-        //   if (data.recipient.id) {
-        //     setDefaultValueRecipient({
-        //       value: data.recipient.id,
-        //       label: data.recipient.name,
-        //     });
-        //   }
-        // }
-      } catch (err) {
-        toast.error('Falha ao carregar dados');
+        console.tron.log(formRef);
+        formRef.current.setFieldValue('recipient_id', {
+          value: response.data.recipient.id,
+          label: response.data.recipient.name,
+        });
+        formRef.current.setFieldValue('deliveryman_id', {
+          value: response.data.deliveryman.id,
+          label: response.data.deliveryman.name,
+        });
       }
     }
-
-    loadData();
+    loadInitialData(id);
   }, [id]);
 
-  const recipientsOptions = useMemo(() => {
-    return recipients.map(recipient => ({
-      value: recipient,
+  const customStylesSelectInput = {
+    control: provided => ({
+      ...provided,
+      height: 45,
+    }),
+  };
+
+  async function handleSubmit(data, { reset }) {
+    formRef.current.setErrors({});
+    try {
+      const schema = Yup.object().shape({
+        product: Yup.string().required('O nome do produto é obrigatório'),
+        recipient_id: Yup.string().required('O destinatário é obrigatório'),
+        deliveryman_id: Yup.string().required('O entregador é obrigatório'),
+      });
+
+      await schema.validate(data, {
+        abortEarly: false,
+      });
+
+      if (id) {
+        await api.put(`/deliveries/${id}`, {
+          product: data.product,
+          recipient_id: data.recipient_id,
+          deliveryman_id: data.deliveryman_id,
+        });
+        history.push('/deliveries');
+        toast.success('Encomenda editada com sucesso!');
+      } else {
+        await api.post('/deliveries', {
+          product: data.product,
+          recipient_id: data.recipient_id,
+          deliveryman_id: data.deliveryman_id,
+        });
+        toast.success('Encomenda criada com sucesso!');
+      }
+
+      reset();
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        const errorMessages = {};
+
+        err.inner.forEach(error => {
+          errorMessages[error.path] = error.message;
+        });
+
+        formRef.current.setErrors(errorMessages);
+      }
+    }
+  }
+
+  async function loadRecipientOptions(inputValue, callback) {
+    const response = await api.get('/recipients', {
+      params: {
+        q: inputValue,
+      },
+    });
+
+    const data = response.data.map(recipient => ({
+      value: recipient.id,
       label: recipient.name,
     }));
-  }, [recipients]);
 
-  const deliverymanOptions = useMemo(() => {
-    return deliverymen.map(deliveryman => ({
-      value: deliveryman,
+    callback(data);
+  }
+
+  async function loadDeliverymenOptions(inputValue, callback) {
+    const response = await api.get('/deliverymen', {
+      params: {
+        q: inputValue,
+      },
+    });
+
+    const data = response.data.map(deliveryman => ({
+      value: deliveryman.id,
       label: deliveryman.name,
     }));
-  }, [deliverymen]);
 
-  async function handleSubmit(data) {
-    if (!selectedRecipient || !selectedDeliveryman || !data.product) {
-      toast.error('Preencha todo o formulário');
-      return;
-    }
-
-    data.recipient_id = selectedRecipient.id;
-    data.deliveryman_id = selectedDeliveryman.id;
-
-    try {
-      await api.post('/deliveries', data);
-
-      toast.success('Encomenda criada com sucesso!');
-
-      history.push('/deliveries');
-    } catch (error) {
-      console.tron.log(error);
-      toast.error(
-        'Não foi possível realizar o cadastro. Verifique seus dados.'
-      );
-    }
-  }
-
-  // function handleGoBack(e) {
-  //   e.preventDefault(); // Cancela submit do form
-
-  //   // history.goBack(); // ou history.push('/deliveries');
-  //   history.push('/deliveries');
-  // }
-
-  function handleSave() {
-    formRef.current.submitForm();
-  }
-
-  function handleChangeRecipient(data) {
-    setSelectedRecipient(data.value);
-  }
-
-  function handleChangeDeliveryman(data) {
-    setSelectedDeliveryman(data.value);
+    callback(data);
   }
 
   return (
     <Container>
       <Content>
-        {/* <Form onSubmit={handleSubmit} initialData={delivery || undefined}> */}
-        <Form onSubmit={handleSubmit} ref={formRef}>
-          <HeaderBody>
-            <Title>Cadastro de encomendas</Title>
-            <div>
-              <BackButton />
-              <SaveButton action={handleSave} />
-            </div>
-          </HeaderBody>
-          <FormContainer>
-            {console.tron.log(defaultValueRecipient)}
-            <Select
-              name="recipient.name"
-              label="Destinatário"
-              placeholder="Selecione um destinatário"
-              options={recipientsOptions}
-              defaultValue={defaultValueRecipient || undefined}
-              onChange={handleChangeRecipient}
-              noOptionsMessage={() => 'Nenhum destinatário encontrado'}
-            />
-            <Select
-              name="deliveryman.name"
-              label="Entregador"
-              placeholder="Selecione um entregador"
-              options={deliverymanOptions}
-              defaultValue={
-                delivery
-                  ? {
-                      value: delivery.deliveryman.id,
-                      label: delivery.deliveryman.name,
-                    }
-                  : undefined
-              }
-              onChange={handleChangeDeliveryman}
-              noOptionsMessage={() => 'Nenhum deliveryman encontrado'}
-            />
+        <HeaderForm title="Cadastro de encomendas">
+          <BackButton />
+          <SaveButton action={() => formRef.current.submitForm()} />
+        </HeaderForm>
 
-            <Input
-              name="product"
-              title="Nome do produto"
-              placeholder="Ex: Livro"
+        <UnForm onSubmit={handleSubmit} ref={formRef}>
+          <section>
+            <AsyncSelectInput
+              type="text"
+              label="Destinatário"
+              name="recipient_id"
+              placeholder="Destinatários"
+              noOptionsMessage={() => 'Nenhum destinatário encontrado'}
+              loadOptions={loadRecipientOptions}
+              styles={customStylesSelectInput}
             />
-          </FormContainer>
-        </Form>
+            <AsyncSelectInput
+              type="text"
+              label="Entregador"
+              name="deliveryman_id"
+              placeholder="Entregadores"
+              noOptionsMessage={() => 'Nenhum entregador encontrado'}
+              loadOptions={loadDeliverymenOptions}
+              styles={customStylesSelectInput}
+            />
+          </section>
+
+          <Input
+            label="Nome do produto"
+            name="product"
+            type="text"
+            placeholder="Nome do produto"
+            onKeyPress={e =>
+              e.key === 'Enter' ? formRef.current.submitForm() : null
+            }
+          />
+        </UnForm>
       </Content>
     </Container>
   );
