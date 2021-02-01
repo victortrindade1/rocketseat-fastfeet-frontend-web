@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { MdAdd } from 'react-icons/md';
+import { toast } from 'react-toastify';
 
 import history from '~/services/history';
 
@@ -91,6 +92,30 @@ function Deliveries() {
     setSearchText(search);
   }
 
+  const handleDelete = useCallback(
+    async delivery => {
+      // eslint-disable-next-line no-alert
+      const confirm = window.confirm(
+        'Você tem certeza que deseja deletar isso?'
+      );
+
+      if (!confirm) {
+        toast.error('Encomenda não apagada!');
+        return;
+      }
+
+      try {
+        await api.delete(`/deliveries/${delivery.id}`);
+        // updateDeliveries();
+        toast.success('Encomenda apagada com sucesso!');
+        setDeliveries(deliveries.filter(({ id }) => id !== delivery.id));
+      } catch (err) {
+        toast.error('Essa encomenda não pode ser deletada!');
+      }
+    },
+    [deliveries]
+  );
+
   // Carrega dados no state deliveries ao renderizar
   useEffect(() => {
     async function loadDeliveries() {
@@ -139,7 +164,12 @@ function Deliveries() {
           <tbody>
             {deliveries.map((delivery, index) => {
               return (
-                <DeliveryItem key={delivery.id} data={delivery} index={index} />
+                <DeliveryItem
+                  key={delivery.id}
+                  data={delivery}
+                  index={index}
+                  onDelete={() => handleDelete(delivery)}
+                />
               );
             })}
           </tbody>

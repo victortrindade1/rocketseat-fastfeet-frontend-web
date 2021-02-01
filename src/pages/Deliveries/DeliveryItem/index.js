@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { MdRemoveRedEye, MdEdit, MdDeleteForever } from 'react-icons/md';
+
 import history from '~/services/history';
 
 import Avatar from '~/components/Avatar';
@@ -15,7 +16,7 @@ import {
   StatusDelivery,
 } from './styles';
 
-function DeliveryItem({ data, index }) {
+function DeliveryItem({ data, index, onDelete }) {
   const [openModal, setOpenModal] = useState(false);
 
   const handleOpenModal = () => {
@@ -65,7 +66,7 @@ function DeliveryItem({ data, index }) {
               <MdEdit size={24} color="#4D85EE" />
               Editar
             </button>
-            <button type="button">
+            <button type="button" onClick={onDelete}>
               <MdDeleteForever size={24} color="#DE3B3B" />
               Excluir
             </button>
@@ -85,6 +86,7 @@ function DeliveryItem({ data, index }) {
 }
 
 DeliveryItem.propTypes = {
+  onDelete: PropTypes.func.isRequired,
   data: PropTypes.shape({
     id: PropTypes.string.isRequired,
     stringId: PropTypes.string.isRequired,
