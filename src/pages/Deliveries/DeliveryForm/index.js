@@ -4,10 +4,8 @@ import { PropTypes } from 'prop-types';
 import { toast } from 'react-toastify';
 
 import HeaderForm from '~/components/HeaderForm';
-import BackButton from '~/components/Button/BackButton';
-import SaveButton from '~/components/Button/SaveButton';
-import Input from '~/components/Form/Input';
-import AsyncSelectInput from '~/components/Form/AsyncSelectInput';
+import { BackButton, SaveButton } from '~/components/Button';
+import { Input, AsyncSelectInput } from '~/components/Form';
 
 import api from '~/services/api';
 import history from '~/services/history';

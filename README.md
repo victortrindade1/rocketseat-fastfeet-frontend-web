@@ -12,4 +12,4 @@ https://github.com/EliasGcf/fastfeet-web
 
 # O q estou fazendo agora:
 
-Estou fazendo o componente DeliverymanItem
+Vou fazer o Submit do Cadastrar, o Editar e o Excluir de Entregadores

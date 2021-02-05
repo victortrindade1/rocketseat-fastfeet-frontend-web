@@ -28,6 +28,7 @@ module.exports = {
     'react-native/no-raw-text': 'off',
     'no-param-reassign': 'off',
     'no-underscore-dangle': 'off',
+    'no-alert': 'off',
     camelcase: 'off',
     'react/state-in-constructor': ['off', 'always'],
     'no-console': ['error', { allow: ['tron'] }],

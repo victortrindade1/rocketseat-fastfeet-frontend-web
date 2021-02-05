@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { MdAdd } from 'react-icons/md';
+import history from '~/services/history';
 
-// import history from '~/services/history';
 import api from '~/services/api';
 
 import HeaderBody from '~/components/HeaderBody';
@@ -99,7 +99,7 @@ function Deliverymen() {
           <IconButton
             Icon={MdAdd}
             title="CADASTRAR"
-            // action={() => history.push('/deliveries/new')}
+            action={() => history.push('/deliverymen/new')}
             type="button"
           />
         </HeaderBody>
