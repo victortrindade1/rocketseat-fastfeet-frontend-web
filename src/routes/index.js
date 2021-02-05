@@ -1,14 +1,15 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
-import Route from './Route';
 
-import SignIn from '~/pages/SignIn';
 import Deliveries from '~/pages/Deliveries';
 import DeliveryForm from '~/pages/Deliveries/DeliveryForm';
 import Deliverymen from '~/pages/Deliverymen';
 import DeliverymanForm from '~/pages/Deliverymen/DeliverymanForm';
 import Problems from '~/pages/Problems';
 import Recipients from '~/pages/Recipients';
+import SignIn from '~/pages/SignIn';
+
+import Route from './Route';
 
 export default function Routes() {
   return (
@@ -25,6 +26,12 @@ export default function Routes() {
       <Route path="/deliverymen" exact component={Deliverymen} isPrivate />
       <Route
         path="/deliverymen/new"
+        exact
+        component={DeliverymanForm}
+        isPrivate
+      />
+      <Route
+        path="/deliverymen/edit/:id"
         exact
         component={DeliverymanForm}
         isPrivate

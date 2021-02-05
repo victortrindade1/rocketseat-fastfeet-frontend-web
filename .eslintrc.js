@@ -17,7 +17,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: ['react', 'jsx-a11y', 'import', 'react-hooks', 'prettier'],
+  plugins: ['react', 'jsx-a11y', 'import', 'react-hooks', 'prettier', 'eslint-plugin-import-helpers'],
   rules: {
     'prettier/prettier': 'error',
     'react/jsx-filename-extension': ['warn', { extensions: ['.jsx', '.js'] }],
@@ -28,7 +28,7 @@ module.exports = {
     'react-native/no-raw-text': 'off',
     'no-param-reassign': 'off',
     'no-underscore-dangle': 'off',
-    'no-alert': 'off',
+    // 'no-alert': 'off',
     camelcase: 'off',
     'react/state-in-constructor': ['off', 'always'],
     'no-console': ['error', { allow: ['tron'] }],
@@ -37,6 +37,18 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     "react/require-default-props": "off",
+    'import-helpers/order-imports': [
+			'warn',
+			{
+				newlinesBetween: 'always',
+				groups: [
+					'/^react/',
+					'module',
+					'/^~/',
+					[ 'parent',	'sibling', 'index' ]],
+				alphabetize: { order: 'asc', ignoreCase: true },
+			},
+	  ],
   },
   settings: {
     'import/resolver': {

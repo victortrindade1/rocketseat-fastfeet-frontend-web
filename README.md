@@ -12,4 +12,4 @@ https://github.com/EliasGcf/fastfeet-web
 
 # O q estou fazendo agora:
 
-Vou fazer o Submit do Cadastrar, o Editar e o Excluir de Entregadores
+Terminei o Form do Deliveryman. Em Deliveryman, falta apenas linkar Editar e fazer o Excluir.

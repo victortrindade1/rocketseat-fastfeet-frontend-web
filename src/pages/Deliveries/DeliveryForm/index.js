@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from 'react';
-import * as Yup from 'yup';
-import { PropTypes } from 'prop-types';
 import { toast } from 'react-toastify';
 
-import HeaderForm from '~/components/HeaderForm';
+import { PropTypes } from 'prop-types';
+import * as Yup from 'yup';
+
 import { BackButton, SaveButton } from '~/components/Button';
 import { Input, AsyncSelectInput } from '~/components/Form';
-
+import HeaderForm from '~/components/HeaderForm';
 import api from '~/services/api';
 import history from '~/services/history';
 
@@ -27,7 +27,6 @@ function DeliveryForm({ match }) {
         // da api, e popula onde tem msm nome na prop name do component
         formRef.current.setData(response.data);
 
-        console.tron.log(formRef);
         formRef.current.setFieldValue('recipient_id', {
           value: response.data.recipient.id,
           label: response.data.recipient.name,
