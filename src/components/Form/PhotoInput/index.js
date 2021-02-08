@@ -17,7 +17,6 @@ function PhotoInput({ name, ...rest }) {
       setPreview(null);
       return;
     }
-    console.tron.log(file);
     const previewURL = URL.createObjectURL(file);
     setPreview(previewURL);
   }, []);

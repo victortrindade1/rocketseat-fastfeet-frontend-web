@@ -18,7 +18,7 @@ function Deliveries() {
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState(0);
   const [searchText, setSearchText] = useState('');
-  console.tron.log(deliveries);
+
   // seta delivery.status
   function verifyStatus(delivery) {
     if (delivery.canceled_at) {

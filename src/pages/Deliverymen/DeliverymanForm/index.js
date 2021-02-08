@@ -19,7 +19,6 @@ export default function DeliverymanForm({ match }) {
 			if (id) {
 				const response = await api.get(`/deliverymen/${deliverymanId}`);
 
-        console.tron.log(response);
 				formRef.current.setData(response.data);
 				formRef.current.setFieldValue('avatar', response?.data?.avatar?.url);
 			}
