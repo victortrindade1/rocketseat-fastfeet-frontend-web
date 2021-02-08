@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { MdAdd } from 'react-icons/md';
+import { toast } from 'react-toastify';
+
+import IconButton from '~/components/Button/IconButton';
+import SearchInput from '~/components/Form/SearchInput';
+import HeaderBody from '~/components/HeaderBody';
+import Pagination from '~/components/Pagination';
+import Table from '~/components/Table';
+import api from '~/services/api';
 import history from '~/services/history';
 
-import api from '~/services/api';
-
-import HeaderBody from '~/components/HeaderBody';
-import Table from '~/components/Table';
-import SearchInput from '~/components/Form/SearchInput';
-import IconButton from '~/components/Button/IconButton';
-import Pagination from '~/components/Pagination';
-
 import DeliverymanItem from './DeliverymanItem';
-
 import { Container, Content } from './styles';
 
 function Deliverymen() {
@@ -73,6 +72,30 @@ function Deliverymen() {
     setSearchText(search);
   }
 
+  const handleDelete = useCallback(
+    async deliveryman => {
+      // eslint-disable-next-line no-alert
+      const confirm = window.confirm(
+        'Você tem certeza que deseja deletar isso?'
+      );
+
+      if (!confirm) {
+        toast.error('Entregador não apagado!');
+        return;
+      }
+
+      // No backend tem validação pra não deletar se tiver entrega a fazer
+      try {
+        await api.delete(`/deliverymen/${deliveryman.id}`);
+        toast.success('Entregador apagado com sucesso!');
+        setDeliverymen(deliverymen.filter(({ id }) => id !== deliveryman.id));
+      } catch (err) {
+        toast.error('Esse entregador não pode ser deletado!');
+      }
+    },
+    [deliverymen]
+  );
+
   // Carrega dados
   useEffect(() => {
     async function loadDeliverymen() {
@@ -120,7 +143,7 @@ function Deliverymen() {
                   key={deliveryman.id}
                   data={deliveryman}
                   index={index}
-                  // onDelete={() => handleDelete(deliveryman)}
+                  onDelete={() => handleDelete(deliveryman)}
                 />
               );
             })}

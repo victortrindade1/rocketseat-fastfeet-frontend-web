@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { MdRemoveRedEye, MdEdit, MdDeleteForever } from 'react-icons/md';
 
-import history from '~/services/history';
+import PropTypes from 'prop-types';
 
-import Avatar from '~/components/Avatar';
 import ActionsMenu from '~/components/ActionsMenu';
+import Avatar from '~/components/Avatar';
 import SimpleModal from '~/components/SimpleModal';
-
 import ShowDelivery from '~/pages/Deliveries/ShowDelivery';
+import history from '~/services/history';
 
 import {
   DeliverymanContainer,

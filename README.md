@@ -12,4 +12,8 @@ https://github.com/EliasGcf/fastfeet-web
 
 # O q estou fazendo agora:
 
+Armeng simples: verificar se tem entrega. Se tem, não pode deletar o entregador.
+
+Tenho q fazer uma validação: se o entregador tiver entrega pra fazer, não pode excluir o entregador. Na verdade, é mais complexo. Qnd deleta um entregador, tem q ver se ele tem tarefa a fazer. Perguntar se vai fazer. Se nao, abrir modal com lista de entregadores e designar a tarefa a outro. Só assim na vida real.
+
 Terminei o Form do Deliveryman. Em Deliveryman, falta apenas linkar Editar e fazer o Excluir.

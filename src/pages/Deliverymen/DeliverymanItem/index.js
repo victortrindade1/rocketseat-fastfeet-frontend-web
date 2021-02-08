@@ -1,18 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { MdEdit, MdDeleteForever } from 'react-icons/md';
 
-// import history from '~/services/history';
+import PropTypes from 'prop-types';
 
-import Avatar from '~/components/Avatar';
 import ActionsMenu from '~/components/ActionsMenu';
-
-// import { Container } from './styles';
+import Avatar from '~/components/Avatar';
+import history from '~/services/history';
 
 function DeliverymanItem({ data, index, onDelete }) {
   const handleEdit = () => {
     // id da encomenda
-    // history.push(`/deliverymen/edit/${data.id}`);
+    history.push(`/deliverymen/edit/${data.id}`);
   };
 
   return (
@@ -44,5 +42,19 @@ function DeliverymanItem({ data, index, onDelete }) {
     </>
   );
 }
+
+DeliverymanItem.propTypes = {
+  onDelete: PropTypes.func.isRequired,
+  data: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    stringId: PropTypes.string.isRequired,
+    name: PropTypes.string,
+    email: PropTypes.string,
+    avatar: PropTypes.shape({
+      url: PropTypes.string,
+    }),
+  }),
+  index: PropTypes.number.isRequired,
+};
 
 export default DeliverymanItem;

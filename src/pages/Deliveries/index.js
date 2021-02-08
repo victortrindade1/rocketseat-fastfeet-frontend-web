@@ -2,27 +2,23 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { MdAdd } from 'react-icons/md';
 import { toast } from 'react-toastify';
 
+import IconButton from '~/components/Button/IconButton';
+import SearchInput from '~/components/Form/SearchInput';
+import HeaderBody from '~/components/HeaderBody';
+import Pagination from '~/components/Pagination';
+import Table from '~/components/Table';
+import api from '~/services/api';
 import history from '~/services/history';
 
-import HeaderBody from '~/components/HeaderBody';
-import Table from '~/components/Table';
-import Pagination from '~/components/Pagination';
-import SearchInput from '~/components/Form/SearchInput';
-import IconButton from '~/components/Button/IconButton';
-
-// import { Container, Pagination } from './styles';
-import { Container, Content } from './styles';
-
-import api from '~/services/api';
-
 import DeliveryItem from './DeliveryItem';
+import { Container, Content } from './styles';
 
 function Deliveries() {
   const [deliveries, setDeliveries] = useState([]);
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState(0);
   const [searchText, setSearchText] = useState('');
-
+  console.tron.log(deliveries);
   // seta delivery.status
   function verifyStatus(delivery) {
     if (delivery.canceled_at) {
@@ -106,7 +102,6 @@ function Deliveries() {
 
       try {
         await api.delete(`/deliveries/${delivery.id}`);
-        // updateDeliveries();
         toast.success('Encomenda apagada com sucesso!');
         setDeliveries(deliveries.filter(({ id }) => id !== delivery.id));
       } catch (err) {
