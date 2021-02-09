@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { MdAdd } from 'react-icons/md';
+import { toast } from 'react-toastify';
 
 import { IconButton } from '~/components/Button';
 import { SearchInput } from '~/components/Form';
 import HeaderBody from '~/components/HeaderBody';
+import Pagination from '~/components/Pagination';
 import Table from '~/components/Table';
 import api from '~/services/api';
 import history from '~/services/history';
@@ -17,16 +19,69 @@ function Recipients() {
   const [pages, setPages] = useState(0);
   const [searchText, setSearchText] = useState('');
 
-  const handleSearch = () => {};
-
   function parseRecipients(data) {
     return data.map(recipient => {
       recipient.stringId =
         recipient.id > 9 ? `#${recipient.id}` : `#0${recipient.id}`;
 
+      recipient.address = `${recipient.street}, ${recipient.number}, ${recipient.city} - ${recipient.state}`;
+
       return recipient;
     });
   }
+
+  async function handleSearch(e) {
+    const search = e.target.value;
+
+    const params = {
+      q: search,
+    };
+
+    const response = await api.get('recipients', { params });
+
+    const data = parseRecipients(response.data.items);
+
+    setRecipients(data);
+    setPage(response.data.page);
+    setPages(response.data.pages);
+    setSearchText(search);
+  }
+
+  async function handlePagination(n) {
+    const params = {
+      page: n,
+      q: searchText,
+    };
+
+    const response = await api.get('recipients', { params });
+    const data = parseRecipients(response.data.items);
+    setRecipients(data);
+    setPage(response.data.page);
+    setPages(response.data.pages);
+  }
+
+  const handleDelete = useCallback(
+    async recipient => {
+      // eslint-disable-next-line no-alert
+      const confirm = window.confirm(
+        'Você tem certeza que deseja deletar isso?'
+      );
+
+      if (!confirm) {
+        toast.error('Destinatário não apagado!');
+        return;
+      }
+
+      try {
+        await api.delete(`/recipients/${recipient.id}`);
+        toast.success('Entregador apagado com sucesso!');
+        setRecipients(recipients.filter(({ id }) => id !== recipient.id));
+      } catch (err) {
+        toast.error('Esse destinatário não pode ser deletado!');
+      }
+    },
+    [recipients]
+  );
 
   // Carrega dados
   useEffect(() => {
@@ -68,18 +123,18 @@ function Recipients() {
             </tr>
           </thead>
           <tbody>
-            {recipients.map((recipient, index) => {
+            {recipients.map(recipient => {
               return (
                 <RecipientItem
                   key={recipient.id}
                   data={recipient}
-                  index={index}
-                  onDelete={() => {}}
+                  onDelete={() => handleDelete(recipient)}
                 />
               );
             })}
           </tbody>
         </Table>
+        <Pagination page={page} pages={pages} callback={handlePagination} />
       </Content>
     </Container>
   );

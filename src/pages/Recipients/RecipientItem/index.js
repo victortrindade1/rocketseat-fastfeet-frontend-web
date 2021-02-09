@@ -1,6 +1,8 @@
 import React from 'react';
 import { MdEdit, MdDeleteForever } from 'react-icons/md';
 
+import PropTypes from 'prop-types';
+
 import ActionsMenu from '~/components/ActionsMenu';
 import history from '~/services/history';
 
@@ -12,9 +14,9 @@ function RecipientItem({ data, onDelete }) {
   return (
     <>
       <tr>
-        <td />
-        <td />
-        <td />
+        <td>{data.stringId}</td>
+        <td>{data.name}</td>
+        <td>{data.address}</td>
         <td>
           <ActionsMenu>
             <button type="button" onClick={handleEdit}>
@@ -31,5 +33,15 @@ function RecipientItem({ data, onDelete }) {
     </>
   );
 }
+
+RecipientItem.propTypes = {
+  onDelete: PropTypes.func.isRequired,
+  data: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    stringId: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
+  }),
+};
 
 export default RecipientItem;

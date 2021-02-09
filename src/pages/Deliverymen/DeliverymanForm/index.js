@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { toast } from 'react-toastify';
-
+import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 
 import { BackButton, SaveButton } from '~/components/Button';
@@ -14,6 +14,7 @@ export default function DeliverymanForm({ match }) {
   const { id } = match.params;
   const formRef = useRef(null);
 
+  // Carrega dados para Edição
   useEffect(() => {
 		async function loadInitialData(deliverymanId) {
 			if (id) {
@@ -95,9 +96,6 @@ export default function DeliverymanForm({ match }) {
             label="Nome"
             name="name"
             placeholder="Nome do entregador"
-            onKeyPress={e =>
-              e.key === 'Enter' ? formRef.current.submitForm() : null
-            }
           />
           <Input
             type="text"
@@ -113,3 +111,11 @@ export default function DeliverymanForm({ match }) {
     </Container>
   );
 }
+
+DeliverymanForm.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.node,
+    }).isRequired,
+  }).isRequired,
+};
