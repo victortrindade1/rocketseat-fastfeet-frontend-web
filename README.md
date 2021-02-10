@@ -12,4 +12,7 @@ https://github.com/EliasGcf/fastfeet-web
 
 # O q estou fazendo agora:
 
-Do Form do Recipient só falta a máscara do CEP
+Falta fazer page Problems.
+
+Verificar se tem mais alguma coisa. Eu sei q tem o lance do e-mail, q ainda não
+fiz, mas acho q isso deve usar apenas no APP. Não tenho certeza.

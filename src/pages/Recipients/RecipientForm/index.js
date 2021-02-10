@@ -5,15 +5,13 @@ import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 
 import { BackButton, SaveButton } from '~/components/Button';
-import { Input } from '~/components/Form';
+import { Input, MaskInput } from '~/components/Form';
 import HeaderForm from '~/components/HeaderForm';
 import api from '~/services/api';
 
 import { Container, Content, UnForm } from './styles';
 
 function RecipientForm({ match }) {
-  // TODO: máscara do CEP
-
   const formRef = useRef(null);
   const { id } = match.params;
 
@@ -27,7 +25,7 @@ function RecipientForm({ match }) {
         complement: Yup.string(),
         city: Yup.string().required('A cidade é obrigatória'),
         state: Yup.string().required('O estado é obrigatório'),
-        zipcode: Yup.string(),
+        zipcode: Yup.string().required('O CEP é obrigatório'),
       });
 
       await schema.validate(data, {
@@ -132,11 +130,13 @@ function RecipientForm({ match }) {
               name="state"
               placeholder="Nome do estado"
             />
-            <Input
+            <MaskInput
               type="text"
               label="CEP"
               name="zipcode"
               placeholder="00000-000"
+              mask="99999-999"
+              maskPlaceholder="_____-___"
               onKeyPress={e =>
                 e.key === 'Enter' ? formRef.current.submitForm() : null
               }
