@@ -1,5 +1,7 @@
 # Desafio 9: Fastfeet frontend web
 
+![apresentacao](src/assets/apresentacao.gif)
+
 Etapa 3/4 do Desafio Final
 
 Descrição Desafio: https://github.com/rocketseat-education/bootcamp-gostack-desafio-09#desafio-09-front-end-do-meetapp
