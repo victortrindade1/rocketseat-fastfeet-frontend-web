@@ -98,11 +98,12 @@ function DeliveryForm({ match }) {
       },
     });
 
-    const data = response.data.map(recipient => ({
+    const data = response.data.items.map(recipient => ({
       value: recipient.id,
       label: recipient.name,
     }));
 
+    console.tron.log(data);
     callback(data);
   }
 
@@ -113,7 +114,7 @@ function DeliveryForm({ match }) {
       },
     });
 
-    const data = response.data.map(deliveryman => ({
+    const data = response.data.items.map(deliveryman => ({
       value: deliveryman.id,
       label: deliveryman.name,
     }));
