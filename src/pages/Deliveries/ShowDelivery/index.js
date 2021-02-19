@@ -1,6 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
 import { parseISO, format } from 'date-fns';
+import PropTypes from 'prop-types';
 
 import { Container, Div, Title, Text, Signature, Scroll } from './styles';
 

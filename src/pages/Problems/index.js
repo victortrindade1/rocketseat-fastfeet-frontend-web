@@ -15,8 +15,12 @@ function Problems() {
   const [pages, setPages] = useState(0);
 
   function parseProblems(data) {
+    // O id não é do problema, e sim do delivery
     return data.map(problem => {
-      problem.stringId = problem.id > 9 ? `#${problem.id}` : `#0${problem.id}`;
+      problem.stringId =
+        problem.delivery.id > 9
+          ? `#${problem.delivery.id}`
+          : `#0${problem.delivery.id}`;
 
       return problem;
     });
@@ -27,9 +31,12 @@ function Problems() {
       page: n,
     };
 
-    const response = await api.get('', { params });
+    const response = await api.get('/delivery/all/problems', { params });
 
-    console.tron.log(response);
+    const data = parseProblems(response.data.items);
+    setProblems(data);
+    setPages(response.data.pages);
+    setPage(response.data.page);
   }
 
   const handleDelete = useCallback(
@@ -58,16 +65,12 @@ function Problems() {
   // Load data
   useEffect(() => {
     async function loadProblems() {
-      try {
-        const response = await api.get('/delivery/all/problems');
+      const response = await api.get('/delivery/all/problems');
 
-        const data = parseProblems(response.data.items);
-        setProblems(data);
-        setPages(response.data.pages);
-        setPage(response.data.page);
-      } catch (error) {
-        console.tron.log(error);
-      }
+      const data = parseProblems(response.data.items);
+      setProblems(data);
+      setPages(response.data.pages);
+      setPage(response.data.page);
     }
 
     loadProblems();

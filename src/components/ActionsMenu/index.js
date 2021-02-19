@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { MdMoreHoriz } from 'react-icons/md';
+
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import PropTypes from 'prop-types';
 
 import { Container, ActionList } from './styles';
 
-function ActionsMenu({ children }) {
+function ActionsMenu({ children, width = undefined }) {
   /*
    * ClickAwayListener do Material-UI detecta qnd clica fora do menu
    */
@@ -25,7 +26,7 @@ function ActionsMenu({ children }) {
         <button type="button" onClick={handleClick}>
           <MdMoreHoriz size={24} />
         </button>
-        <ActionList visible={visible} onClick={handleClickAway}>
+        <ActionList visible={visible} onClick={handleClickAway} w={width}>
           {children}
         </ActionList>
       </Container>

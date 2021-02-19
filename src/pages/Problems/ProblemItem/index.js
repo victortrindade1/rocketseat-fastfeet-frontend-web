@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MdEdit, MdDeleteForever } from 'react-icons/md';
+import { MdRemoveRedEye, MdDeleteForever } from 'react-icons/md';
 
 import PropTypes from 'prop-types';
 
@@ -23,9 +23,9 @@ function ProblemItem({ data, onDelete }) {
         <td>{data.stringId}</td>
         <td>{data.description}</td>
         <td>
-          <ActionsMenu>
+          <ActionsMenu width={220}>
             <button type="button" onClick={handleOpenModal}>
-              <MdEdit size={24} color="#4d85ee" />
+              <MdRemoveRedEye size={24} color="#8E5BE8" />
               Visualizar
             </button>
             <button type="button" onClick={onDelete}>
@@ -36,7 +36,7 @@ function ProblemItem({ data, onDelete }) {
         </td>
       </tr>
       <SimpleModal open={openModal} handleClose={handleCloseModal}>
-        <ShowProblem />
+        <ShowProblem description={data.description} />
       </SimpleModal>
     </>
   );

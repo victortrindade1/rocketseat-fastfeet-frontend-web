@@ -1,5 +1,6 @@
-import styled, { keyframes } from 'styled-components';
 import PerfectScrollbar from 'react-perfect-scrollbar';
+
+import styled, { keyframes } from 'styled-components';
 
 const containerAppear = keyframes`
   0% {

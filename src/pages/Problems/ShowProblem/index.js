@@ -1,9 +1,22 @@
 import React from 'react';
 
-import { Container } from './styles';
+import PropTypes from 'prop-types';
 
-function ShowProblem() {
-  return <Container />;
+import { Container, Scroll, Title, Text } from './styles';
+
+function ShowProblem({ description }) {
+  return (
+    <Container>
+      <Scroll>
+        <Title>VISUALIZAR PROBLEMA</Title>
+        <Text>{description}</Text>
+      </Scroll>
+    </Container>
+  );
 }
+
+ShowProblem.propTypes = {
+  description: PropTypes.string.isRequired,
+};
 
 export default ShowProblem;

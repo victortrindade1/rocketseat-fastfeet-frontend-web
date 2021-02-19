@@ -36,7 +36,6 @@ export const Container = styled.table`
 
     tr td:first-child {
       padding-left: 20px;
-      padding-right: 0;
 
       border-top-left-radius: 4px;
       border-bottom-left-radius: 4px;
